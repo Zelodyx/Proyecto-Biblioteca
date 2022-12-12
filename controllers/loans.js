@@ -105,14 +105,14 @@ const getLoans = async (req = request, res = response) =>{
         conn = await pool.getConnection() //Realizamons la conexion
 
         //Generamos la consulta
-        const Customer = await conn.query(modelloans.queryGetLoans, (error) => {if (error) throw error})
+        const Loans = await conn.query(modelloans.queryGetLoans, (error) => {if (error) throw error})
 
-        if (Customer.length===0){ //En caso de no haber registros lo informamos
+        if (Loans.length===0){ //En caso de no haber registros lo informamos
             res.status(404).json({msg: "No existen prestamos registrados"})
             return
         }
 
-        res.json({Customer}) //Se manda la lista de usuarios
+        res.json({Loans}) //Se manda la lista de usuarios
     }
     catch(error){
         console.log(error)
@@ -133,14 +133,14 @@ const getCustomerLoans = async (req = request, res = response) =>{
         conn = await pool.getConnection() //Realizamons la conexion
 
         //Generamos la consulta
-        const Customer = await conn.query(modelloans.queryGetCustomerLoans,[Customer_Mail], (error) => {if (error) throw error})
+        const Loans = await conn.query(modelloans.queryGetCustomerLoans,[Customer_Mail], (error) => {if (error) throw error})
 
-        if (Customer.length===0){ //En caso de no haber registros lo informamos
+        if (Loans.length===0){ //En caso de no haber registros lo informamos
             res.status(404).json({msg: "No existen prestamos registrados a este usuario"})
             return
         }
 
-        res.json({Customer}) //Se manda la lista de usuarios
+        res.json({Loans}) //Se manda la lista de usuarios
     }
     catch(error){
         console.log(error)
